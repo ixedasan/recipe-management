@@ -28,6 +28,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     short_description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='Recipes/Images', null=True, blank=True)
+    content = QuillField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Recipes'
@@ -42,13 +43,25 @@ class Recipe(models.Model):
             return 'No Image'
 
 
-class Description(models.Model):
-    # recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    recipe = models.OneToOneField(Recipe, on_delete=models.CASCADE)
-    content = QuillField()
+class Like(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = 'Descriptions'
+        verbose_name_plural = 'Likes'
 
     def __str__(self):
-        return self.recipe.title
+        return f'{self.profile} likes {self.recipe}'
+
+
+class Response(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    response = models.TextField(null=True, blank=True)
+    rating = models.IntegerField(choices=[(1, "★☆☆☆☆"), (2, "★★☆☆☆"), (3, "★★★☆☆"), (4, "★★★★☆"), (5, "★★★★★"), ])
+
+    class Meta:
+        verbose_name_plural = 'Responses'
+
+    def __str__(self):
+        return f'{self.profile} responded to {self.recipe}'
