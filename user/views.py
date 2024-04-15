@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from user.models import Profile
+from django.contrib.auth.forms import AuthenticationForm
+
+from .forms import SignUpForm
 
 
 def login_view(request):
@@ -25,33 +28,26 @@ def login_view(request):
 
 
 def signup_view(request):
+    form = SignUpForm()
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
         user_image = request.FILES.get('user_image')
         bio = request.POST.get('bio')
-        if User.objects.filter(username=username).exists():
-            messages.error(request, f'User {username} already exists')
-        else:
-            new_user = User.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                username=username,
-                password=password,
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Profile.objects.create(
+                user=user,
+                image_profile=user_image,
+                bio=bio,
             )
-            new_user = authenticate(username=username, password=password)
-            if new_user is not None:
-                login(request, new_user)
-                Profile.objects.create(
-                    user=new_user,
-                    image_profile=user_image,
-                    bio=bio,
-                )
-                return redirect('index')
-
-    return render(request, 'signup.html')
+            login(request, user)
+            return redirect('index')
+        else:
+            for error in form.errors.values():
+                for msg in error:
+                    messages.error(request, msg)
+    context = {'form': form}
+    return render(request, 'signup.html', context)
 
 
 def logout_view(request):
