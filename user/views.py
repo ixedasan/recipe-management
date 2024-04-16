@@ -23,7 +23,7 @@ def login_view(request):
             else:
                 messages.error(request, 'Wrong password')
         except:
-            messages.error(request, f'User {username} does not exist')
+            messages.error(request, f'User does not exist')
     return render(request, 'login.html')
 
 
