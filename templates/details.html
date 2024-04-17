@@ -68,15 +68,17 @@
             /> -->
 
             <div class="mb-6 flex items-center">
+                <a href="{% url 'profile_detail' recipe.profile.id %}">
                 <img
                         src="{{ recipe.profile.image_profile.url }}"
                         class="mr-2 h-8 rounded-full aspect-square object-cover"
                         alt="avatar"
                         loading="lazy"
                 />
+                </a>
                 <div>
                     <span> Published <u>{{ recipe.create_date }}</u> by </span>
-                    <a href="#!" class="font-medium text-orange-500">{{ recipe.profile.full_name }}</a>
+                    <a href="{% url 'profile_detail' recipe.profile.id %}" class="font-medium text-orange-500">{{ recipe.profile.full_name }}</a>
                 </div>
             </div>
 

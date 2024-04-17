@@ -46,7 +46,7 @@
                 {% endif %}
                 <p class="text-sm">
                     Recipe by
-                    <a href="" class="font-bold text-orange-500"
+                    <a href="{% url 'profile_detail' recipe.profile.id %}" class="font-bold text-orange-500"
                     >{{ recipe.profile.full_name }}</a
                     >
                 </p>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from recipes.models import Category, Recipe, Response
+from recipes.models import Category, Recipe, Response, Like
+from user.models import Profile
 
 
 def index(request):
@@ -22,3 +23,17 @@ def recipe_detail(request, id):
         'user_recipes': user_recipes,
     }
     return render(request, 'details.html', context)
+
+
+def profile_detail(request, id):
+    profile = Profile.objects.get(id=id)
+    user_recipes = Recipe.objects.filter(profile=profile).order_by("-id")
+    count_of_likes = Like.objects.filter(recipe__profile=profile).count()
+    count_of_recipes = Recipe.objects.filter(profile=profile).count()
+    context = {
+        'profile': profile,
+        'count_of_likes': count_of_likes,
+        'user_recipes': user_recipes,
+        'count_of_recipes': count_of_recipes,
+    }
+    return render(request, 'profile_details.html', context)
