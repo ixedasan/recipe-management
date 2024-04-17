@@ -29,6 +29,7 @@ class Recipe(models.Model):
     short_description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='Recipes/Images', null=True, blank=True)
     content = QuillField(null=True, blank=True)
+    create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Recipes'
@@ -45,7 +46,7 @@ class Recipe(models.Model):
 
 class Like(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='likes')
 
     class Meta:
         verbose_name_plural = 'Likes'

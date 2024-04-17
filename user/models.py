@@ -25,20 +25,3 @@ class Profile(models.Model):
 
     def full_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
-
-
-class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-
-    class Meta:
-        verbose_name_plural = 'Followers'
-
-    def __str__(self):
-        return self.follower.user.first_name
-
-    def follower_full_name(self):
-        return f'{self.follower.first_name} {self.follower.last_name}'
-
-    def following_full_name(self):
-        return f'{self.following.first_name} {self.following.last_name}'

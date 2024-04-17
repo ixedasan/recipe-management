@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <!-- Hero -->
+    <div
+            class="px-6 py-12 text-center mt-[-8rem] lg:mt-0 md:px-12 lg:text-left"
+    >
+        <div
+                class="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl xl:px-32"
+        >
+            <div class="grid items-center lg:grid-cols-2">
+                <div class="mb-12 md:mt-12 lg:mt-0 lg:mb-0 z-10">
+                    <div
+                            class="block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.55)] dark:shadow-black/20 md:px-12 lg:-mr-14 backdrop-blur-[20px]"
+                    >
+                        <h1
+                                class="mt-2 mb-16 text-3xl font-bold tracking-tight md:text-5xl xl:text-6xl"
+                        >
+                            {{ recipe.title }} <br/>
+                            <span class="text-orange-500"
+                            ><i class="fa-solid fa-heart"></i> {{ recipe.likes.count }}</span
+                            >
+                            <span class="ml-4"
+                            ><i class="fa-solid fa-comment"></i> {{ responses.count }}</span
+                            >
+                        </h1>
+                        <a
+                                class="mb-2 inline-block rounded bg-orange-500 px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#ff9500] transition duration-150 ease-in-out hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.3),0_4px_18px_0_rgba(255,149,0,0.2)] focus:bg-orange-600 focus:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.3),0_4px_18px_0_rgba(255,149,0,0.2)] focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.3),0_4px_18px_0_rgba(255,149,0,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(255,149,0,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.2),0_4px_18px_0_rgba(255,149,0,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.2),0_4px_18px_0_rgba(255,149,0,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(255,149,0,0.2),0_4px_18px_0_rgba(255,149,0,0.1)] md:mr-2 md:mb-0"
+                                data-te-ripple-init
+                                data-te-ripple-color="light"
+                                href="#!"
+                                role="button"
+                        >Like <i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a
+                                class="inline-block rounded px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-orange-500 transition duration-150 ease-in-out hover:bg-neutral-500 hover:bg-opacity-10 hover:text-orange-600 focus:text-orange-600 focus:outline-none focus:ring-0 active:text-orange-700 dark:hover:bg-neutral-700 dark:hover:bg-opacity-40"
+                                data-te-ripple-init
+                                data-te-ripple-color="light"
+                                href="#description"
+                                {#                            role="button"#}
+                        >Details <i class="fa-solid fa-arrow-down"></i
+                        ></a>
+                    </div>
+                </div>
+                <div class="md:mb-12 lg:mb-0 lg:ml-[-5rem]">
+                    <img
+                            class="w-[55vw] h-[30vh] lg:w-[35vw] lg:h-[70vh] shadow-xl rounded-lg object-cover"
+                            src="{{ recipe.image.url }}"
+                            alt="Recipe image"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero end -->
+
+    <!-- Derscription -->
+    <!-- Container for demo purpose -->
+    <div class="container my-24 mx-auto md:px-6">
+        <!-- Section: Design Block -->
+        <section class="mb-32" id="description">
+            <!-- <img
+                src="https://mdbcdn.b-cdn.net/img/new/slides/198.jpg"
+                class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20"
+                alt="image"
+            /> -->
+
+            <div class="mb-6 flex items-center">
+                <img
+                        src="{{ recipe.profile.image_profile.url }}"
+                        class="mr-2 h-8 rounded-full aspect-square object-cover"
+                        alt="avatar"
+                        loading="lazy"
+                />
+                <div>
+                    <span> Published <u>{{ recipe.create_date }}</u> by </span>
+                    <a href="#!" class="font-medium text-orange-500">{{ recipe.profile.full_name }}</a>
+                </div>
+            </div>
+
+            <div class="mb-16 flex flex-wrap">
+                {{ recipe.content.html|safe }}
+            </div>
+        </section>
+        <!-- Section: Design Block -->
+    </div>
+    <!-- Container for demo purpose -->
+    <!-- Derscription end -->
+
+    <!-- Review -->
+    <div class="container my-24 mx-auto md:px-6">
+        <section class="mb-32 text-center">
+            <h2 class="mb-12 text-3xl font-bold">Reviews {{ responses.count }}</h2>
+            {% for response in responses %}
+                <div class="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
+                    <div class="mb-12 md:mb-0">
+                        <a href="">
+                            <div class="mb-6 flex justify-center">
+                                <img
+                                        src="{{ response.profile.image_profile.url }}"
+                                        class="w-32 rounded-full shadow-lg dark:shadow-black/20"
+                                />
+                            </div>
+                            <h5 class="mb-2 text-lg font-bold">{{ response.profile.full_name }}</h5>
+                        </a>
+                        <p class="mb-4">
+                            {{ response.response }}
+                        </p>
+                        <span class="text-orange-500">
+                          {{ response.get_rating_display }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    <!-- Review end  -->
+
+    <!-- More for user -->
+    {% if user_recipes.count >= 1 %}
+    <div class="m-4 lg:m-8">
+        <div class="flex justify-between p-4 rounded-xl shadow-xl mb-4">
+            <h1 class="text-3xl font-bold">More From This User</h1>
+            <a href="">View all</a>
+        </div>
+    </div>
+
+    <div class="p-4 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for recipe in user_recipes %}
+            	{% include "components/recipe.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <!-- More for user end -->
+{% endblock %}

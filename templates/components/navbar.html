@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="z-10 w-full fixed">
+<div class="z-50 w-full fixed">
     <div class="navbar bg-base-100">
         <div class="navbar-start">
             <div class="dropdown">
@@ -43,7 +43,7 @@
                     {% endif %} 
                 </ul>
             </div>
-            <a class="btn btn-ghost text-xl">Recipes</a>
+            <a href="{% url 'index' %}" class="btn btn-ghost text-xl">Recipes</a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
