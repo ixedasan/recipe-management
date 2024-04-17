@@ -37,3 +37,11 @@ def profile_detail(request, id):
         'count_of_recipes': count_of_recipes,
     }
     return render(request, 'profile_details.html', context)
+
+
+def recipes_catalog(request):
+    recipes = Recipe.objects.all().order_by("-id")
+    context = {
+        'recipes': recipes,
+    }
+    return render(request, 'recipes_catalog.html', context)

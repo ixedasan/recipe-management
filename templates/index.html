@@ -2,151 +2,130 @@
 {% load static %}
 
 {% block body %}
-<!-- Hero -->
-<section class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%]">
-    <div
-            class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
-    >
-        <div class="mr-auto place-self-center lg:col-span-7">
-            <h1
-                    class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
-            >
-                Best Recipes <span class='text-orange-500'>for you</span>
-            </h1>
-            <p
-                    class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
-            >
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus iste, ipsum dolor soluta ut, quasi aut
-                eos enim earum libero porro aperiam, ex quis tenetur voluptate. Assumenda ipsa asperiores qui!
-            </p>
-            <a
-                    href="#"
-                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
-            >
-                Get started
-                <svg
-                        class="w-5 h-5 ml-2 -mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%]">
+        <div
+                class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+        >
+            <div class="mr-auto place-self-center lg:col-span-7">
+                <h1
+                        class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
                 >
-                    <path
-                            fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"
-                    ></path>
-                </svg>
-            </a>
-            <a
-                    href="#"
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-            >
-                Speak to Sales
-            </a>
+                    Best Recipes <span class='text-orange-500'>for you</span>
+                </h1>
+                <p
+                        class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+                >
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus iste, ipsum dolor soluta ut, quasi
+                    aut
+                    eos enim earum libero porro aperiam, ex quis tenetur voluptate. Assumenda ipsa asperiores qui!
+                </p>
+            </div>
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                <img
+                        src="static/images/meal.jpg"
+                        alt="mockup"
+                />
+            </div>
         </div>
-        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img
-                    src="static/images/meal.jpg"
-                    alt="mockup"
-            />
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Hero end -->
+    <!-- Hero end -->
 
-<!-- sub hero section -->
-<div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-4 sm:px-8 py-8 gap-8"
->
+    <!-- sub hero section -->
     <div
-            class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-center text-white"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-4 sm:px-8 py-8 gap-8"
     >
-        <div
-                class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1710633600&semt=sph')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
-        ></div>
-        <div class="relative p-6 px-6 py-14 z-10">
-            <h2
-                    class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
+        <a href="{% url 'recipes_catalog' %}">
+            <div
+                    class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-center text-white"
             >
-                Explore Recipes
-            </h2>
-        </div>
-    </div>
-    <div
-            class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-center text-white"
-    >
-        <div
-                class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=612x612&w=0&k=20&c=X6CkFGpSKhNZeiii8Pp2M_YrBdqs7tRaBytkGi48a0U=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
-        ></div>
-        <div class="relative p-6 px-6 py-14 z-10">
-            <h2
-                    class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
-            >
-                Explore Categories
-            </h2>
-        </div>
-    </div>
-    <div
-            class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-center text-white"
-    >
-        <div
-                class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1212417063/photo/table-full-of-food-for-family-dinner.jpg?s=612x612&w=0&k=20&c=VQw95DggeCDG_NHy5wHcg8BV7MhQmDDtLr-qxs4suiY=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
-        ></div>
-        <div class="relative p-6 px-6 py-14 z-10">
-            <h2
-                    class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
-            >
-                Share Recipes
-            </h2>
-        </div>
-    </div>
-</div>
-<!-- sub hero section end -->
-
-<!-- Categories and recipes section -->
-<div class="lg:p-8 p-4 grid grid-cols-1 lg:grid-cols-4">
-    <!-- Categories -->
-    <div class="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:m-4">
-        {% for category in categories %}
-            <a href="">
                 <div
-                        class="relative grid w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
+                        class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1710633600&semt=sph')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
+                ></div>
+                <div class="relative p-6 px-6 py-14 z-10">
+                    <h2
+                            class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
+                    >
+                        Explore Recipes
+                    </h2>
+                </div>
+            </div>
+        </a>
+        <div
+                class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-center text-white"
+        >
+            <div
+                    class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=612x612&w=0&k=20&c=X6CkFGpSKhNZeiii8Pp2M_YrBdqs7tRaBytkGi48a0U=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
+            ></div>
+            <div class="relative p-6 px-6 py-14 z-10">
+                <h2
+                        class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
                 >
+                    Explore Categories
+                </h2>
+            </div>
+        </div>
+        <div
+                class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-center text-white"
+        >
+            <div
+                    class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1212417063/photo/table-full-of-food-for-family-dinner.jpg?s=612x612&w=0&k=20&c=VQw95DggeCDG_NHy5wHcg8BV7MhQmDDtLr-qxs4suiY=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
+            ></div>
+            <div class="relative p-6 px-6 py-14 z-10">
+                <h2
+                        class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
+                >
+                    Share Recipes
+                </h2>
+            </div>
+        </div>
+    </div>
+    <!-- sub hero section end -->
+
+    <!-- Categories and recipes section -->
+    <div class="lg:p-8 p-4 grid grid-cols-1 lg:grid-cols-4">
+        <!-- Categories -->
+        <div class="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:m-4">
+            {% for category in categories %}
+                <a href="">
                     <div
-                            class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('{{ category.image.url }}')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
+                            class="relative grid w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
                     >
                         <div
-                                class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"
-                        ></div>
-                    </div>
-                    <div class="relative p-6 px-6 py-16">
-                        <h2
-                                class="block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased"
+                                class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('{{ category.image.url }}')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
                         >
-                            {{ category.title }}
-                        </h2>
+                            <div
+                                    class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"
+                            ></div>
+                        </div>
+                        <div class="relative p-6 px-6 py-16">
+                            <h2
+                                    class="block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased"
+                            >
+                                {{ category.title }}
+                            </h2>
+                        </div>
                     </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
-    <!-- Categories end -->
-    <!-- Recipes section -->
-    <div class="lg:col-span-3 m-4">
-        <div class="flex justify-between shadow-xl p-4 rounded-xl mb-4">
-            <h1 class="text-3xl font-bold">Latest Recipes</h1>
-            <a href="">View all</a>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {% for recipe in recipes %}
-                {% include "components/recipe.html" %}
+                </a>
             {% endfor %}
         </div>
+        <!-- Categories end -->
+        <!-- Recipes section -->
+        <div class="lg:col-span-3 m-4">
+            <div class="flex justify-between shadow-xl p-4 rounded-xl mb-4">
+                <h1 class="text-3xl font-bold">Latest Recipes</h1>
+                <a href="{% url 'recipes_catalog' %}">View all</a>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                {% for recipe in recipes %}
+                    {% include "components/recipe.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Recipes section end -->
     </div>
-    <!-- Recipes section end -->
-</div>
-<!-- Categories and recipes section end -->
+    <!-- Categories and recipes section end -->
 {% endblock %}
 
 

@@ -26,10 +26,10 @@
                 >
                     <li><a class="font-bold">Item 1</a></li>
                     <li>
-                        <a class="font-bold">Parent</a>
+                        <a class="font-bold">RECIPES</a>
                         <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
+                            <li><a href="{% url 'recipes_catalog' %}">Catalog</a></li>
+                            <li><a>Categories</a></li>
                         </ul>
                     </li>
                     {% if request.user.is_authenticated %}
@@ -52,10 +52,10 @@
                 <li><a class="font-bold">Item 1</a></li>
                 <li>
                     <details>
-                        <summary class="font-bold">Parent</summary>
+                        <summary class="font-bold">RECIPES</summary>
                         <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
+                            <li><a href="{% url 'recipes_catalog' %}">Catalog</a></li>
+                            <li><a>Categories</a></li>
                         </ul>
                     </details>
                 </li>
