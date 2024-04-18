@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block body %}
-    <!-- Hero -->
     <section class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%]">
         <div
                 class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
@@ -29,10 +28,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Hero end -->
-
-    <!-- sub hero section -->
     <div
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-4 sm:px-8 py-8 gap-8"
     >
@@ -52,20 +47,22 @@
                 </div>
             </div>
         </a>
-        <div
-                class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-center text-white"
-        >
+        <a href="{% url 'categories_catalog' %}">
             <div
-                    class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=612x612&w=0&k=20&c=X6CkFGpSKhNZeiii8Pp2M_YrBdqs7tRaBytkGi48a0U=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
-            ></div>
-            <div class="relative p-6 px-6 py-14 z-10">
-                <h2
-                        class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
-                >
-                    Explore Categories
-                </h2>
+                    class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-center text-white"
+            >
+                <div
+                        class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=612x612&w=0&k=20&c=X6CkFGpSKhNZeiii8Pp2M_YrBdqs7tRaBytkGi48a0U=')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none opacity-75"
+                ></div>
+                <div class="relative p-6 px-6 py-14 z-10">
+                    <h2
+                            class="block font-sans text-2xl sm:text-3xl font-bold leading-[1.5] tracking-normal text-white antialiased"
+                    >
+                        Explore Categories
+                    </h2>
+                </div>
             </div>
-        </div>
+        </a>
         <div
                 class="relative grid w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-center text-white"
         >
@@ -81,14 +78,10 @@
             </div>
         </div>
     </div>
-    <!-- sub hero section end -->
-
-    <!-- Categories and recipes section -->
     <div class="lg:p-8 p-4 grid grid-cols-1 lg:grid-cols-4">
-        <!-- Categories -->
         <div class="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:m-4">
             {% for category in categories %}
-                <a href="">
+                <a href="{% url 'category_detail' category.id %}">
                     <div
                             class="relative grid w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
                     >
@@ -110,8 +103,6 @@
                 </a>
             {% endfor %}
         </div>
-        <!-- Categories end -->
-        <!-- Recipes section -->
         <div class="lg:col-span-3 m-4">
             <div class="flex justify-between shadow-xl p-4 rounded-xl mb-4">
                 <h1 class="text-3xl font-bold">Latest Recipes</h1>
@@ -123,9 +114,7 @@
                 {% endfor %}
             </div>
         </div>
-        <!-- Recipes section end -->
     </div>
-    <!-- Categories and recipes section end -->
 {% endblock %}
 
 

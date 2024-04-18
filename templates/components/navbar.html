@@ -1,109 +1,43 @@
 {% load static %}
 
 <div class="z-50 w-full fixed">
-    <div class="navbar bg-base-100">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                    <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                        />
-                    </svg>
-                </div>
-                <ul
-                        tabindex="0"
-                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                    <li><a class="font-bold">Item 1</a></li>
-                    <li>
-                        <a class="font-bold">RECIPES</a>
-                        <ul class="p-2">
-                            <li><a href="{% url 'recipes_catalog' %}">Catalog</a></li>
-                            <li><a>Categories</a></li>
-                        </ul>
-                    </li>
-                    {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'profile_detail' request.user.profile.id %}" class="font-bold">Profile</a></li>
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                        <li><a href="{% url "logout" %}" class="btn mx-2 my-1 btn-orange text-white">Logout</a></li>
-                    {% else %}
-                        <li><a href="{% url "login" %}" class="btn mx-2 my-1 btn-orange text-white">Login</a></li>
-                        <li>
-                            <a href="{% url "signup" %}" class="btn mx-2 my-1 btn-outline btn-orange">Signup</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
+    <div class="navbar bg-base-100 flex justify-between items-center relative">
+        <div class="flex-1">
             <a href="{% url 'index' %}" class="btn btn-ghost text-xl">Recipes</a>
         </div>
-        <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li><a class="font-bold">Item 1</a></li>
-                <li>
-                    <details>
-                        <summary class="font-bold">RECIPES</summary>
-                        <ul class="p-2">
-                            <li><a href="{% url 'recipes_catalog' %}">Catalog</a></li>
-                            <li><a>Categories</a></li>
-                        </ul>
-                    </details>
-                </li>
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'profile_detail' request.user.profile.id %}" class="font-bold">Profile</a></li>
-                {% endif %}
-            </ul>
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+            <div class="dropdown dropdown-hover">
+                <div tabindex="0" role="button" class="btn m-1">Catalog</div>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="{% url 'recipes_catalog' %}">Recipes</a></li>
+                    <li><a href="{% url 'categories_catalog' %}">Categories</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-end">
+        <div class="flex-none gap-2">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="hidden lg:grid btn btn-orange mx-2 text-white">Logout</a>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="avatar" src="{{ request.user.profile.image_profile.url }}"/>
+                        </div>
+                    </div>
+                    <ul tabindex="0"
+                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li>
+                            <a href="{% url 'profile_detail' request.user.profile.id %}" class="justify-between">
+                                Profile
+                            </a>
+                        </li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
             {% else %}
                 <a href="{% url 'login' %}" class="hidden lg:grid btn btn-orange text-white">Login</a>
                 <a href="{% url 'signup' %}"
                    class="hidden lg:grid btn hover:text-white mx-2 btn-outline btn-orange"
                 >Signup</a>
             {% endif %}
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-neutral text-white">
-                    Search
-                </div>
-                <ul
-                        tabindex="0"
-                        class="dropdown-content z-[1] mt-4 menu p-2 shadow bg-base-100 rounded-box w-[90vw] md:w-[30vw]"
-                >
-                    <div class="relative flex w-full">
-                        <div class="relative h-10 w-full">
-                            <input
-                                    type="text"
-                                    class="peer h-full w-full rounded-[7px] border border-orange-500 bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal text-orange-500 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-orange-500 focus:border-2 focus:border-orange-500 focus:border-t-transparent focus:outline-0"
-                                    placeholder=" "
-                                    value=""
-                            />
-                            <label
-                                    class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-orange-500 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-orange-500 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-orange-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-orange-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-orange-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
-                            >
-                                Search here...
-                            </label>
-                        </div>
-                        <button
-                                class="!absolute right-1 top-1 select-none rounded bg-orange-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-gray-500/20 transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button"
-                        >
-                            Search
-                        </button>
-                    </div>
-                </ul>
-            </div>
         </div>
     </div>
 </div>

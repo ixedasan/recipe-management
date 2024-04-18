@@ -45,3 +45,21 @@ def recipes_catalog(request):
         'recipes': recipes,
     }
     return render(request, 'recipes_catalog.html', context)
+
+
+def categories_catalog(request):
+    categories = Category.objects.all().order_by("-id")
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'categories_catalog.html', context)
+
+
+def category_detail(request, id):
+    category = Category.objects.get(id=id)
+    recipes = Recipe.objects.filter(category=category).order_by("-id")
+    context = {
+        'category': category,
+        'recipes': recipes,
+    }
+    return render(request, 'category_detail.html', context)

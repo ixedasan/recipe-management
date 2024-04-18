@@ -28,6 +28,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     short_description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='Recipes/Images', null=True, blank=True)
+    ingredients = QuillField(null=True, blank=True)
     content = QuillField(null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 

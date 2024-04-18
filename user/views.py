@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from user.models import Profile
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 from .forms import SignUpForm
 
@@ -49,7 +50,7 @@ def signup_view(request):
     context = {'form': form}
     return render(request, 'signup.html', context)
 
-
+@login_required()
 def logout_view(request):
     logout(request)
     return redirect('index')

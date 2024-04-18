@@ -6,4 +6,6 @@ urlpatterns = [
     path('recipe/<id>/', views.recipe_detail, name='recipe_detail'),
     path('profile/<id>/', views.profile_detail, name='profile_detail'),
     path('recipes/', views.recipes_catalog, name='recipes_catalog'),
+    path('categories/', views.categories_catalog, name='categories_catalog'),
+    path('category/<id>/', views.category_detail, name='category_detail'),
 ]

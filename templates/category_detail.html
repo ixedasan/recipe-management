@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block body %}
     <div
             class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('images/bg.jpg')] h-[30vh] lg:h-[20vh]"
@@ -18,27 +19,19 @@
                         <h1
                                 class="mt-2 mb-2 text-3xl font-bold tracking-tight md:text-5xl xl:text-6xl"
                         >
-                            <span class="text-orange-500">{{ profile.user.first_name }}</span> {{ profile.user.last_name }}
+                            {{ category.title }}
                             <br/>
-                            <span class="md:text-3xl">
-									<span class="text-orange-500"
-                                    ><i class="fa-solid fa-heart"></i> {{ count_of_likes }}</span
-                                    >
-                            <span class="mx-4"><i class="fa-solid fa-clapperboard"></i>
-                                {{ count_of_recipes }}
-                            </span>
-                            </span>
                         </h1>
                         <div class=" text-1xl">
                             <h2>
-                                {{ profile.bio }}
+                                {{ category.description }}
                             </h2>
                         </div>
                     </div>
                 </div>
                 <div class="md:mb-12 lg:mb-0">
                     <img
-                            src="{{ profile.image_profile.url }}"
+                            src="{{ category.image.url }}"
                             class="w-full rounded-lg shadow-lg dark:shadow-black/20"
                             alt=""
                     />
@@ -65,11 +58,10 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {% for recipe in user_recipes %}
+            {% for recipe in recipes %}
                 {% include "components/recipe.html" %}
             {% endfor %}
 
         </div>
     </div>
 {% endblock %}
-
