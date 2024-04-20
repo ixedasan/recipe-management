@@ -5,7 +5,6 @@ from .froms import RecipeForm
 from django.contrib.auth.decorators import login_required
 
 
-
 def index(request):
     recipes = Recipe.objects.all().order_by("-id")[:6]
     categories = Category.objects.all().order_by("?")[:5]
@@ -67,6 +66,7 @@ def category_detail(request, id):
     }
     return render(request, 'category_detail.html', context)
 
+
 @login_required
 def recipe_add(request):
     form = RecipeForm()
@@ -80,3 +80,30 @@ def recipe_add(request):
         else:
             form = RecipeForm()
     return render(request, 'recipe_add.html', {'form': form})
+
+
+@login_required
+def recipe_update(request, id):
+    recipe = Recipe.objects.get(id=id)
+    form = RecipeForm(instance=recipe)
+    if request.user.profile != recipe.profile:
+        return redirect('recipe_detail', id=recipe.id)
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
+        if form.is_valid():
+            form.save()
+            return redirect('recipe_detail', id=recipe.id)
+        else:
+            form = RecipeForm(instance=recipe)
+    return render(request, 'recipe_update.html', {'form': form})
+
+
+@login_required
+def recipe_delete(request, id):
+    recipe = Recipe.objects.get(id=id)
+    if request.user.profile != recipe.profile:
+        return redirect('recipe_detail', id=recipe.id)
+    if request.method == 'POST':
+        recipe.delete()
+        return redirect('index')
+    return render(request, 'recipe_delete.html', {'recipe': recipe})

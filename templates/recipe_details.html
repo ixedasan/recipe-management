@@ -42,6 +42,10 @@
                                 {#                            role="button"#}
                         >Details <i class="fa-solid fa-arrow-down"></i
                         ></a>
+                        {% if request.user.profile == recipe.profile %}
+                        <a href="{% url 'recipe_update' recipe.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'recipe_delete' recipe.id %}" class="ml-5"><i class="fa-solid fa-trash"></i></a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="md:mb-12 lg:mb-0 lg:ml-[-5rem]">
@@ -98,7 +102,7 @@
             {% for response in responses %}
                 <div class="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
                     <div class="mb-12 md:mb-0">
-                        <a href="">
+                        <a href="{% url 'profile_detail' recipe.profile.id %}">
                             <div class="mb-6 flex justify-center">
                                 <img
                                         src="{{ response.profile.image_profile.url }}"

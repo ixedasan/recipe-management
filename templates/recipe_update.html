@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div
+            class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('{% static 'images/bg.jpg' %}')] h-[500px]">
+    </div>
+
+    <div class="w-100 mx-auto px-6 sm:max-w-2xl md:max-w-3xl md:px-12 lg:max-w-5xl xl:max-w-7xl xl:px-32">
+        <div class="text-center">
+            <div
+                    class="block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.55)] dark:shadow-black/20 md:py-16 md:px-12 mt-[-170px] backdrop-blur-[30px]">
+                <h1 class="mt-2 mb-2 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
+                    Update Recipe
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <div class="relative w-[42rem] mb-12 lg:mb-0">
+            <div
+                    class="relative bg-[hsla(0,0%,100%,0.8)] backdrop-blur-[25px] backdrop-saturate-[200%] block rounded-lg px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,15%,0.9)] dark:shadow-black/20 md:px-12"
+            >
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="grid gap-6">
+                        {% for field in form %}
+                            {% if field.name != 'content' %}
+                                <div class="relative flex w-full">
+                                    <div class="relative text-left h-10 w-full m-4">
+                                        <p>
+                                            <label for="{{ field.id_for_label }}"
+                                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ field.label }}</label>
+                                            {{ field }}
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="relative flex w-full mt-6 mb-6">
+                            <div class="relative text-left h-10 w-full m-2">
+                                {{ form.media }}
+                                {{ form.content }}
+                            </div>
+                        </div>
+                        <button
+                                type="submit"
+                                class="my-6 mt-9 inline-block w-full rounded bg-orange-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#ff7f50] transition duration-150 ease-in-out hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:bg-orange-600 focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(255,127,80,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)]"
+                        >
+                            save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
