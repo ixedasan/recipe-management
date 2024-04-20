@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from recipes.models import Category, Recipe, Response, Like
 from user.models import Profile
+from .froms import RecipeForm
+from django.contrib.auth.decorators import login_required
+
 
 
 def index(request):
@@ -22,7 +25,7 @@ def recipe_detail(request, id):
         'responses': responses,
         'user_recipes': user_recipes,
     }
-    return render(request, 'details.html', context)
+    return render(request, 'recipe_details.html', context)
 
 
 def profile_detail(request, id):
@@ -63,3 +66,17 @@ def category_detail(request, id):
         'recipes': recipes,
     }
     return render(request, 'category_detail.html', context)
+
+@login_required
+def recipe_add(request):
+    form = RecipeForm()
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.profile = request.user.profile
+            recipe.save()
+            return redirect('recipe_detail', id=recipe.id)
+        else:
+            form = RecipeForm()
+    return render(request, 'recipe_add.html', {'form': form})

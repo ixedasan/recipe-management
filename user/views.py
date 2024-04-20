@@ -50,7 +50,7 @@ def signup_view(request):
     context = {'form': form}
     return render(request, 'signup.html', context)
 
-@login_required()
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('index')
