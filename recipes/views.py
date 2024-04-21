@@ -123,3 +123,8 @@ def like(request, id):
         like = Like(profile=request.user.profile, recipe=recipe)
         like.save()
     return redirect('recipe_detail', id=recipe.id)
+
+@login_required
+def favorites(request):
+    recipes = Recipe.objects.filter(likes__profile=request.user.profile)
+    return render(request, 'favorites.html', {'recipes': recipes})

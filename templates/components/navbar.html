@@ -6,13 +6,15 @@
             <a href="{% url 'index' %}" class="btn btn-ghost text-xl">Recipes</a>
         </div>
         <div class="absolute left-1/2 transform -translate-x-1/2">
+            <a href="{% url 'favorites' %}" class="btn">Favorites</a>
             <div class="dropdown dropdown-hover">
-                <div tabindex="0" role="button" class="btn m-1">Catalog</div>
+                <div tabindex="0" role="button" class="btn m-1 font-bold">Catalog</div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a href="{% url 'recipes_catalog' %}">Recipes</a></li>
                     <li><a href="{% url 'categories_catalog' %}">Categories</a></li>
                 </ul>
             </div>
+            <a class="btn">Item 2</a>
         </div>
         <div class="flex-none gap-2">
             {% if request.user.is_authenticated %}
