@@ -1,5 +1,5 @@
 from django import forms
-from recipes.models import Recipe
+from recipes.models import Recipe, Response
 
 
 class RecipeForm(forms.ModelForm):
@@ -39,3 +39,26 @@ class RecipeForm(forms.ModelForm):
         self.fields['short_description'].widget.attrs[
             'required'] = ''
 
+
+class ResponseForm(forms.ModelForm):
+    class Meta:
+        model = Response
+        fields = 'response', 'rating'
+        labels = {
+            'response': 'Response',
+            'rating': 'Rating',
+        }
+        widgets = {
+            'response': forms.Textarea(attrs={
+                'class': 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}),
+            'rating': forms.Select(attrs={'class': 'select select-bordered w-full max-w-xs'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['response'].widget.attrs[
+            'oninput'] = 'responsePreview(this)'
+
+        self.fields['rating'].widget.attrs[
+            'required'] = ''

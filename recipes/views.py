@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from recipes.models import Category, Recipe, Response, Like
 from user.models import Profile
-from .froms import RecipeForm
+from .froms import RecipeForm, ResponseForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -16,13 +17,24 @@ def index(request):
 
 
 def recipe_detail(request, id):
-    recipe = Recipe.objects.get(id=id)
+    recipe = get_object_or_404(Recipe, pk=id)
     responses = Response.objects.filter(recipe=recipe).order_by("?")[:3]
     user_recipes = Recipe.objects.filter(profile=recipe.profile).exclude(id=recipe.id).order_by("?")[:3]
+    if request.method == 'POST':
+        form = ResponseForm(request.POST)
+        if form.is_valid():
+            response = form.save(commit=False)
+            response.profile = request.user.profile
+            response.recipe = recipe
+            response.save()
+            return redirect('recipe_detail', id=recipe.id)
+    else:
+        form = ResponseForm()
     context = {
         'recipe': recipe,
         'responses': responses,
         'user_recipes': user_recipes,
+        'form': form,
     }
     return render(request, 'recipe_details.html', context)
 
@@ -43,18 +55,12 @@ def profile_detail(request, id):
 
 def recipes_catalog(request):
     recipes = Recipe.objects.all().order_by("-id")
-    context = {
-        'recipes': recipes,
-    }
-    return render(request, 'recipes_catalog.html', context)
+    return render(request, 'recipes_catalog.html', {'recipes': recipes})
 
 
 def categories_catalog(request):
     categories = Category.objects.all().order_by("-id")
-    context = {
-        'categories': categories,
-    }
-    return render(request, 'categories_catalog.html', context)
+    return render(request, 'categories_catalog.html', {'categories': categories, })
 
 
 def category_detail(request, id):
@@ -69,7 +75,6 @@ def category_detail(request, id):
 
 @login_required
 def recipe_add(request):
-    form = RecipeForm()
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -77,15 +82,14 @@ def recipe_add(request):
             recipe.profile = request.user.profile
             recipe.save()
             return redirect('recipe_detail', id=recipe.id)
-        else:
-            form = RecipeForm()
+    else:
+        form = RecipeForm()
     return render(request, 'recipe_add.html', {'form': form})
 
 
 @login_required
 def recipe_update(request, id):
-    recipe = Recipe.objects.get(id=id)
-    form = RecipeForm(instance=recipe)
+    recipe = get_object_or_404(Recipe, pk=id)
     if request.user.profile != recipe.profile:
         return redirect('recipe_detail', id=recipe.id)
     if request.method == 'POST':
@@ -93,17 +97,29 @@ def recipe_update(request, id):
         if form.is_valid():
             form.save()
             return redirect('recipe_detail', id=recipe.id)
-        else:
-            form = RecipeForm(instance=recipe)
+    else:
+        form = RecipeForm(instance=recipe)
     return render(request, 'recipe_update.html', {'form': form})
 
 
 @login_required
 def recipe_delete(request, id):
-    recipe = Recipe.objects.get(id=id)
+    recipe = get_object_or_404(Recipe, pk=id)
     if request.user.profile != recipe.profile:
         return redirect('recipe_detail', id=recipe.id)
     if request.method == 'POST':
         recipe.delete()
         return redirect('index')
     return render(request, 'recipe_delete.html', {'recipe': recipe})
+
+
+@login_required
+def like(request, id):
+    recipe = get_object_or_404(Recipe, pk=id)
+    like = Like.objects.filter(profile=request.user.profile, recipe=recipe)
+    if like:
+        like.delete()
+    else:
+        like = Like(profile=request.user.profile, recipe=recipe)
+        like.save()
+    return redirect('recipe_detail', id=recipe.id)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.utils.safestring import mark_safe
 from user.models import Profile
 from django_quill.fields import QuillField
@@ -53,6 +54,8 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.profile} likes {self.recipe}'
+
+
 
 
 class Response(models.Model):

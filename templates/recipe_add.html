@@ -78,6 +78,9 @@
                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ field.label }}</label>
                                                     {{ field }}
                                                 </p>
+                                                <div class="errors">
+                                                    {{ field.errors }}
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -89,6 +92,8 @@
                                         {{ form.content}}
                                     </div>
                                 </div>
+                                
+                            
                                 <button
                                         type="submit"
                                         class="my-6 mt-9 inline-block w-full rounded bg-orange-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#ff7f50] transition duration-150 ease-in-out hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:bg-orange-600 focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(255,127,80,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)]"
