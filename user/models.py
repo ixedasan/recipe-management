@@ -5,8 +5,8 @@ from django.utils.safestring import mark_safe
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image_profile = models.ImageField(upload_to='Users/Profile_images', null=True, blank=True)
-    # default='Users/Profile_images/default.jpg')
+    image_profile = models.ImageField(upload_to='Users/Profile_images', null=True, blank=True,
+                                      default='Users/Profile_images/default.jpg')
     bio = models.TextField(null=True, blank=True)
 
     class Meta:

@@ -32,7 +32,7 @@
                                 role="button"
                         >Like
                             <i class="fa-solid fa-heart"></i>
-{#                            <i class="fa-regular fa-heart"></i>#}
+                            {#                            <i class="fa-regular fa-heart"></i>#}
                         </a>
                         <a
                                 class="inline-block rounded px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-orange-500 transition duration-150 ease-in-out hover:bg-neutral-500 hover:bg-opacity-10 hover:text-orange-600 focus:text-orange-600 focus:outline-none focus:ring-0 active:text-orange-700 dark:hover:bg-neutral-700 dark:hover:bg-opacity-40"
@@ -85,8 +85,8 @@
     <div class="container my-24 mx-auto md:px-6">
         <section class="mb-32 text-center">
             <h2 class="mb-12 text-3xl font-bold">Reviews {{ responses.count }}</h2>
-            {% for response in responses %}
-                <div class="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
+            <div class="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
+                {% for response in responses %}
                     <div class="mb-12 md:mb-0">
                         <a href="{% url 'profile_detail' recipe.profile.id %}">
                             <div class="mb-6 flex justify-center">
@@ -105,8 +105,8 @@
                           {{ response.get_rating_display }}
                         </span>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </section>
         {% if request.user.is_authenticated %}
             <div class="flex flex-col ml-auto">

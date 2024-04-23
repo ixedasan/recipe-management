@@ -38,3 +38,4 @@ class SignUpForm(UserCreationForm):
         if len(username) < 5:
             raise forms.ValidationError("Username must be more than 5 characters")
         return username
+

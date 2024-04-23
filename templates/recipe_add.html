@@ -3,19 +3,19 @@
 
 {% block body %}
     <div class="hero min-h-screen bg-base-200">
-        <div class="text-center py-10">
+        <div class="text-center py-10 m-10">
             <h1 class="text-4xl font-bold text-gray-700">Share The Recipe</h1>
-            <div class="hero-content flex-col lg:flex-row m-6">
+            <div class="hero-content flex-col lg:flex-row m-2">
                 <div
                         class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-2xl"
                 >
                     <div
                             class="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
                     >
-                        <img    id="imagePreview"
-                                class="w-full h-[13rem] object-cover"
-                                src="{% static 'images/burgerjpg.jpg' %}"
-                                alt="Preview Image"
+                        <img id="imagePreview"
+                             class="w-full h-[13rem] object-cover"
+                             src="{% static 'images/burgerjpg.jpg' %}"
+                             alt="Preview Image"
                         />
                         <div
                                 class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60"
@@ -86,17 +86,15 @@
                                     {% endif %}
                                 {% endfor %}
 
-                                <div class="relative flex w-full mt-6 mb-6">
-                                    <div class="relative text-left h-10 w-full m-2">
-                                        {{ form.media }}
-                                        {{ form.content}}
+                                <div class="relative flex w-full mt-6 mb">
+                                    <div class="relative text-left h-auto w-full m-2">
+                                            {{ form.media }}
+                                            {{ form.content }}
                                     </div>
                                 </div>
-                                
-                            
                                 <button
                                         type="submit"
-                                        class="my-6 mt-9 inline-block w-full rounded bg-orange-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#ff7f50] transition duration-150 ease-in-out hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:bg-orange-600 focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(255,127,80,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)]"
+                                        class="my-6 inline-block w-full rounded bg-orange-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#ff7f50] transition duration-150 ease-in-out hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:bg-orange-600 focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] focus:outline-none focus:ring-0 active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.3),0_4px_18px_0_rgba(255,127,80,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(255,127,80,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(255,127,80,0.2),0_4px_18px_0_rgba(255,127,80,0.1)]"
                                 >
                                     share
                                 </button>

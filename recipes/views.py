@@ -4,6 +4,7 @@ from user.models import Profile
 from .froms import RecipeForm, ResponseForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 def index(request):
@@ -54,7 +55,12 @@ def profile_detail(request, id):
 
 
 def recipes_catalog(request):
-    recipes = Recipe.objects.all().order_by("-id")
+    search_query = request.GET.get('search', '')
+    if search_query:
+        recipes = Recipe.objects.filter(Q(title__icontains=search_query) |
+                                        Q(short_description=search_query))
+    else:
+        recipes = Recipe.objects.all().order_by("-id")
     return render(request, 'recipes_catalog.html', {'recipes': recipes})
 
 

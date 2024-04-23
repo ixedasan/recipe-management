@@ -29,7 +29,9 @@ def login_view(request):
 def signup_view(request):
     form = SignUpForm()
     if request.method == 'POST':
-        user_image = request.FILES.get('user_image')
+        user_image = request.FILES.get('user_image', None)
+        if not user_image:
+            user_image = 'Users/Profile_images/default.jpg'
         bio = request.POST.get('bio')
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -41,12 +43,13 @@ def signup_view(request):
             )
             login(request, user)
             return redirect('index')
-        else:
-            for error in form.errors.values():
-                for msg in error:
-                    messages.error(request, msg)
+    else:
+        for error in form.errors.values():
+            for msg in error:
+                messages.error(request, msg)
     context = {'form': form}
     return render(request, 'signup.html', context)
+
 
 @login_required
 def logout_view(request):

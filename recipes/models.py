@@ -38,6 +38,10 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def average_rating(self):
+        return self.responses.all().aggregate(Avg('rating'))['rating__avg']
+
     def recipe_picture(self):
         if self.image:
             return mark_safe(f'<img src="{self.image.url}" width="32" height="32">')
@@ -56,11 +60,9 @@ class Like(models.Model):
         return f'{self.profile} likes {self.recipe}'
 
 
-
-
 class Response(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='responses')
     response = models.TextField(null=True, blank=True)
     rating = models.IntegerField(choices=[(1, "★☆☆☆☆"), (2, "★★☆☆☆"), (3, "★★★☆☆"), (4, "★★★★☆"), (5, "★★★★★"), ])
 
