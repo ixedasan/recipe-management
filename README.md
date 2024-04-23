@@ -27,7 +27,7 @@ This is a Django web application that allows users to search for and share recip
 ## Technologies Used
 - Front-end: Django Templates, Tailwind CSS
 - Back-end: Django (Python)
-- Database: PostgreSQL (or your preferred database)
+- Database: SQLite
 
 ## Getting Started
 
