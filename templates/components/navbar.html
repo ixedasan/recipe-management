@@ -6,15 +6,50 @@
             <a href="{% url 'index' %}" class="btn btn-ghost text-xl">Recipes</a>
         </div>
         <div class="absolute left-1/2 transform -translate-x-1/2">
-            <a href="{% url 'favorites' %}" class="btn">Favorites</a>
             <div class="dropdown dropdown-hover">
                 <div tabindex="0" role="button" class="btn m-1 font-bold">Catalog</div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a href="{% url 'recipes_catalog' %}">Recipes</a></li>
                     <li><a href="{% url 'categories_catalog' %}">Categories</a></li>
+                    <li><a href="{% url 'favorites' %}">Favorites</a></li>
+                    <li><a href="{% url 'recipe_add' %}">Share Recipe</a></li>
                 </ul>
             </div>
-            <a class="btn">Item 2</a>
+        </div>
+        <div class="dropdown dropdown-end mr-4">
+            <div tabindex="0" role="button" class="btn btn-neutral text-white">
+                Search
+            </div>
+            <form action="{% url 'recipes_catalog' %}" method="get">
+                <ul
+                        tabindex="0"
+                        class="dropdown-content z-[1] mt-4 menu p-2 shadow bg-base-100 rounded-box w-[90vw] md:w-[30vw]"
+                >
+                    {% csrf_token %}
+                    <div class="relative flex w-full">
+                        <div class="relative h-10 w-full">
+                            <input
+                                    type="text"
+                                    class="peer h-full w-full rounded-[7px] border border-orange-500 bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal text-orange-500 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-orange-500 focus:border-2 focus:border-orange-500 focus:border-t-transparent focus:outline-0"
+                                    placeholder=" "
+                                    value=""
+                                    name="search"
+                            />
+                            <label
+                                    class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-orange-500 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-orange-500 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-orange-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-orange-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-orange-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
+                            >
+                                Search here...
+                            </label>
+                        </div>
+                        <button
+                                class="!absolute right-1 top-1 select-none rounded bg-orange-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-gray-500/20 transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                type="submit"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </ul>
+            </form>
         </div>
         <div class="flex-none gap-2">
             {% if request.user.is_authenticated %}

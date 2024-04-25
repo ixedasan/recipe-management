@@ -21,6 +21,7 @@ def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, pk=id)
     responses = Response.objects.filter(recipe=recipe).order_by("?")[:3]
     user_recipes = Recipe.objects.filter(profile=recipe.profile).exclude(id=recipe.id).order_by("?")[:3]
+    is_like = Like.objects.filter(profile=request.user.profile, recipe=recipe)
     if request.method == 'POST':
         form = ResponseForm(request.POST)
         if form.is_valid():
@@ -36,6 +37,7 @@ def recipe_detail(request, id):
         'responses': responses,
         'user_recipes': user_recipes,
         'form': form,
+        'is_like': is_like,
     }
     return render(request, 'recipe_details.html', context)
 
@@ -84,6 +86,8 @@ def recipe_add(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
+            if not request.FILES.get('image'):
+                form.instance.image = '../static/images/recipe_default.png'
             recipe = form.save(commit=False)
             recipe.profile = request.user.profile
             recipe.save()
@@ -101,6 +105,8 @@ def recipe_update(request, id):
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
+            if not request.FILES.get('image'):
+                form.instance.image = recipe.image
             form.save()
             return redirect('recipe_detail', id=recipe.id)
     else:
@@ -130,7 +136,8 @@ def like(request, id):
         like.save()
     return redirect('recipe_detail', id=recipe.id)
 
+
 @login_required
 def favorites(request):
-    recipes = Recipe.objects.filter(likes__profile=request.user.profile)
+    recipes = Recipe.objects.filter(likes__profile=request.user.profile).order_by("-id")
     return render(request, 'favorites.html', {'recipes': recipes})

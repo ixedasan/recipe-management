@@ -31,9 +31,6 @@ class RecipeForm(forms.ModelForm):
         self.fields['title'].widget.attrs[
             'required'] = ''
 
-        self.fields['image'].widget.attrs[
-            'required'] = ''
-
         self.fields['short_description'].widget.attrs[
             'oninput'] = 'descPreview(this)'
         self.fields['short_description'].widget.attrs[
