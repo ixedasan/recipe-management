@@ -39,7 +39,7 @@ def recipe_detail(request, id):
         'form': form,
         'is_like': is_like,
     }
-    return render(request, 'recipe_details.html', context)
+    return render(request, 'recipes/recipe_details.html', context)
 
 
 def profile_detail(request, id):
@@ -53,7 +53,7 @@ def profile_detail(request, id):
         'user_recipes': user_recipes,
         'count_of_recipes': count_of_recipes,
     }
-    return render(request, 'profile_details.html', context)
+    return render(request, 'recipes/../templates/profile_details.html', context)
 
 
 def recipes_catalog(request):
@@ -63,12 +63,12 @@ def recipes_catalog(request):
                                         Q(short_description=search_query))
     else:
         recipes = Recipe.objects.all().order_by("-id")
-    return render(request, 'recipes_catalog.html', {'recipes': recipes})
+    return render(request, 'recipes/recipes_catalog.html', {'recipes': recipes})
 
 
 def categories_catalog(request):
     categories = Category.objects.all().order_by("-id")
-    return render(request, 'categories_catalog.html', {'categories': categories, })
+    return render(request, 'category/categories_catalog.html', {'categories': categories, })
 
 
 def category_detail(request, id):
@@ -78,7 +78,7 @@ def category_detail(request, id):
         'category': category,
         'recipes': recipes,
     }
-    return render(request, 'category_detail.html', context)
+    return render(request, 'category/category_detail.html', context)
 
 
 @login_required
@@ -94,7 +94,7 @@ def recipe_add(request):
             return redirect('recipe_detail', id=recipe.id)
     else:
         form = RecipeForm()
-    return render(request, 'recipe_add.html', {'form': form})
+    return render(request, 'recipes/operations/recipe_add.html', {'form': form})
 
 
 @login_required
@@ -111,7 +111,7 @@ def recipe_update(request, id):
             return redirect('recipe_detail', id=recipe.id)
     else:
         form = RecipeForm(instance=recipe)
-    return render(request, 'recipe_update.html', {'form': form})
+    return render(request, 'recipes/recipe_update.html', {'form': form})
 
 
 @login_required
@@ -122,7 +122,7 @@ def recipe_delete(request, id):
     if request.method == 'POST':
         recipe.delete()
         return redirect('index')
-    return render(request, 'recipe_delete.html', {'recipe': recipe})
+    return render(request, 'recipes/operations/recipe_delete.html', {'recipe': recipe})
 
 
 @login_required
@@ -140,4 +140,4 @@ def like(request, id):
 @login_required
 def favorites(request):
     recipes = Recipe.objects.filter(likes__profile=request.user.profile).order_by("-id")
-    return render(request, 'favorites.html', {'recipes': recipes})
+    return render(request, 'user/profile/favorites.html', {'recipes': recipes})

@@ -33,19 +33,19 @@ This is a Django web application that allows users to search for and share recip
 
 ### Installation
 1. Clone the repository:
-- `git clone https://github.com/ixedasan/recipe-management.git`
-- `cd recipe-management`
+   - `git clone https://github.com/ixedasan/recipe-management.git`
+   - `cd recipe-management`
 2. Create a virtual environment and activate it:
-- `python -m venv env`
-- `env\Scripts\activate`
+   - `python -m venv .venv`
+   - `.venv\Scripts\activate`
 3. Install Python dependencies:
-- `pip install -r requirements.txt`
+   - `pip install -r requirements.txt`
 4. Create a `.env` file in the root directory and add the following environment variables:
 5. Install Python dependencies:
-- `python manage.py migrate`
+   - `python manage.py migrate`
 6. Run the development server:
-- `python manage.py runserver`
-- The application should now be running at `http://localhost:8000`.
+   - `python manage.py runserver`
+   - The application should now be running at `http://localhost:8000`.
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.

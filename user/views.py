@@ -23,7 +23,7 @@ def login_view(request):
                 messages.error(request, 'Wrong password')
         except:
             messages.error(request, f'User does not exist')
-    return render(request, 'login.html')
+    return render(request, 'user/login.html')
 
 
 def signup_view(request):
@@ -48,7 +48,7 @@ def signup_view(request):
             for msg in error:
                 messages.error(request, msg)
     context = {'form': form}
-    return render(request, 'signup.html', context)
+    return render(request, 'user/signup.html', context)
 
 
 @login_required
