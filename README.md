@@ -1,5 +1,7 @@
 # Django Recipe Management Web Application
 
+![preview](./static/images/for-github.png)
+
 ## Description
 This is a Django web application that allows users to search for and share recipes with others. Users can create accounts, upload their own recipes, leave comments on recipes, and favorite recipes they like. The project utilizes the Tailwind CSS utility-first framework for styling.
 
