@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from recipes.models import Category, Recipe, Response, Like
 from user.models import Profile
-from .froms import RecipeForm, ResponseForm
+from .forms import RecipeForm, ResponseForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
@@ -53,7 +53,7 @@ def profile_detail(request, id):
         'user_recipes': user_recipes,
         'count_of_recipes': count_of_recipes,
     }
-    return render(request, 'recipes/../templates/profile_details.html', context)
+    return render(request, 'user/profile/profile_details.html', context)
 
 
 def recipes_catalog(request):
@@ -111,7 +111,7 @@ def recipe_update(request, id):
             return redirect('recipe_detail', id=recipe.id)
     else:
         form = RecipeForm(instance=recipe)
-    return render(request, 'recipes/recipe_update.html', {'form': form})
+    return render(request, 'recipes/operations/recipe_update.html', {'form': form})
 
 
 @login_required
@@ -139,5 +139,5 @@ def like(request, id):
 
 @login_required
 def favorites(request):
-    recipes = Recipe.objects.filter(likes__profile=request.user.profile).order_by("-id")
+    recipes = Recipe.objects.filter(likes=request.user.profile).order_by("-id")
     return render(request, 'user/profile/favorites.html', {'recipes': recipes})

@@ -31,7 +31,7 @@ def signup_view(request):
     if request.method == 'POST':
         user_image = request.FILES.get('user_image', None)
         if not user_image:
-            user_image = 'Users/Profile_images/default.jpg'
+            user_image = '../static/images/user_default.png'
         bio = request.POST.get('bio')
         form = SignUpForm(request.POST)
         if form.is_valid():

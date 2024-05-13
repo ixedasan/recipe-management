@@ -54,8 +54,5 @@ class ResponseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # self.fields['response'].widget.attrs[
-        #     'oninput'] = 'responsePreview(this)'
-
         self.fields['rating'].widget.attrs[
             'required'] = ''
